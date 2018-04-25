@@ -48,7 +48,7 @@ public class LibroDTO {
 	@Override
 	public String toString() {
 		return "LibrosDTO [nombreLibro=" + nombreLibro + ", nombreAutor=" + nombreAutor + ", editorial=" + editorial
-				+ ", nombreCategoria=" + nombreCategoria + "]";
+				+ ", nombreCategoria=" + nombreCategoria + "]\n";
 	}
 	
 }

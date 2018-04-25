@@ -1,6 +1,7 @@
 package com.iesvirgendelcarmen.jdbc.teoria;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,22 +38,79 @@ public class LibroDAOImp implements LibroDAO {
 
 	@Override
 	public List<LibroDTO> listarLibrosDisponibles() {
-		return null;
+		List<LibroDTO> listaLibrosDisponibles = new ArrayList<>();
+
+		//crear el statement
+		String sql= "select * from libro, categoria where\n" + 
+				"libro.id not in (select idLibro from prestamos) group by categoria;";
+
+		//crear  objeto resultSet
+		try (Statement statement = conexion.createStatement();){
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {
+				LibroDTO libro = new LibroDTO(
+						resultSet.getString(2), resultSet.getString(3), 
+						resultSet.getString(4), resultSet.getString(5));
+				listaLibrosDisponibles.add(libro);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error SQL en listarLibros");
+			e.printStackTrace();
+		}
+		return listaLibrosDisponibles;
 	}
 
 	@Override
 	public boolean borrarLibro(String nombreLibro, String nombreAutor) {
-		return false;
+		String sql = "DELETE FROM libro WHERE nombre=? and autor=?;";
+		try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)){
+			preparedStatement.setString(1, nombreLibro);
+			preparedStatement.setString(2, nombreAutor);
+			return !preparedStatement.execute();
+			
+		} catch (SQLException e) {
+			System.out.println("Error SQL en insertarLibro");
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
 	public boolean insertarLibro(LibroDTO libro) {
-		return false;
+		String sql = "INSERT INTO libros (nombre, autor, editorial, categoria) VALUES (?,?,?,?);";
+		try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)){
+			preparedStatement.setString(1, libro.getNombreLibro());
+			preparedStatement.setString(2, libro.getNombreAutor());
+			preparedStatement.setString(3, libro.getEditorial());
+			preparedStatement.setString(4, libro.getNombreCategoria());
+			return preparedStatement.execute();
+			
+		} catch (SQLException e) {
+			System.out.println("Error SQL en insertarLibro");
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
 	public boolean insertarListaDeLibros(List<LibroDTO> listaLibros) {
-		return false;
+		
+		String sql = "INSERT INTO libro (nombre, autor, editorial, categoria) VALUES (?,?,?,?);";
+		try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)){
+			for (LibroDTO libroDTO : listaLibros) {
+				preparedStatement.setString(1, libroDTO.getNombreLibro());
+				preparedStatement.setString(2, libroDTO.getNombreAutor());
+				preparedStatement.setString(3, libroDTO.getEditorial());
+				preparedStatement.setString(4, libroDTO.getNombreCategoria());
+				preparedStatement.execute();
+			}
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("Error SQL en insertarLibro");
+			e.printStackTrace();
+			return false;
+		}
 	}
-
 }
