@@ -3,9 +3,7 @@ package com.iesvirgendelcarmen.jdbc.teoria;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.Thread.State;
 import java.sql.*;
-import java.util.List;
 import java.util.Properties;
 import org.sqlite.SQLiteConfig;
 public class InsertarDatos {

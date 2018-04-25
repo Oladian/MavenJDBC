@@ -34,7 +34,6 @@ public class TestLibros {
 		manipLibros.borrarLibro(libro3.getNombreLibro(), libro3.getNombreAutor())+"\n"+
 		manipLibros.borrarLibro(libro4.getNombreLibro(), libro4.getNombreAutor())+"\n"+
 		manipLibros.borrarLibro(libro5.getNombreLibro(), libro5.getNombreAutor())+"\n");
-		
 */		
 		System.out.println(listaTotal);
 		//System.out.println(listaLibrosDisponibles);
