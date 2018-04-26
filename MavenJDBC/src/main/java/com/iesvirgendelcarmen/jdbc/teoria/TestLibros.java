@@ -24,9 +24,11 @@ public class TestLibros {
 		listaDeObjetosLibro.add(libro4);
 		listaDeObjetosLibro.add(libro5);
 		
+		//System.out.println(manipLibros.actualizarCategoriaLibro(libro3, "Seguridad"));
+		
 		// inserta los 5 libros
 		
-		System.out.println("Insertar libros: "+manipLibros.insertarListaDeLibros(listaDeObjetosLibro));
+	//	System.out.println("Insertar libros: "+manipLibros.insertarListaDeLibros(listaDeObjetosLibro));
 /*		
 		System.out.println("Borrar libros: \n"+
 	 	manipLibros.borrarLibro(libro1.getNombreLibro(), libro1.getNombreAutor())+"\n"+
@@ -36,7 +38,7 @@ public class TestLibros {
 		manipLibros.borrarLibro(libro5.getNombreLibro(), libro5.getNombreAutor())+"\n");
 */		
 		System.out.println(listaTotal);
-		//System.out.println(listaLibrosDisponibles);
+		System.out.println(listaLibrosDisponibles);
 	}
 
 }
