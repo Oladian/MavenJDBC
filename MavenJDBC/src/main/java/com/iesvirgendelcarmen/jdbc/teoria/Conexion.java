@@ -11,7 +11,7 @@ import org.sqlite.SQLiteConfig ;
 
 public class Conexion {
 
-	private static Connection conexion = null ;
+	private static Connection conexion = null;
 	private Conexion(){}
 	
 	public static Connection getConexion() {
